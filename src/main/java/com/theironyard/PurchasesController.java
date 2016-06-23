@@ -56,7 +56,7 @@ public class PurchasesController {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String home(Model model, String category) {
         Iterable<Purchase> purchase;
-        if (category == null) {
+        if (category != null) {
             purchase = purchases.findByCategory(category);
             model.addAttribute("purchases", purchase);
             }

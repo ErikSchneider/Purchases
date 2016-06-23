@@ -1,5 +1,35 @@
 <html>
 <body>
-
+<div align="center">
+<a href="/">All</a> <b>|</b>
+<a href="/?category=Furniture">Furniture</a> <b>|</b>
+<a href="/?category=Alcohol">Alcohol</a> <b>|</b>
+<a href="/?category=Toiletries">Toiletries</a> <b>|</b>
+<a href="/?category=Shoes">Shoes</a> <b>|</b>
+<a href="/?category=Food">Food</a> <b>|</b>
+<a href="/?category=Jewelry">Jewelry</a>
+<br>
+<br>
+<table>
+    <tr>
+        <th><u>Name</u></th>
+        <th><u>Email</u></th>
+        <th><u>Category</u></th>
+        <th><u>Credit Card #</u></th>
+        <th><u>CVV</u></th>
+        <th><u>Date</u></th>
+    </tr>
+    {{#purchases}}
+    <tr>
+        <td>{{customer.name}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{category}}</td>
+        <td>{{credit_card}}</td>
+        <td>{{cvv}}</td>
+        <td>{{date}}</td>
+    </tr>
+    {{/purchases}}
+</table>
+</div>
 </body>
 </html>
