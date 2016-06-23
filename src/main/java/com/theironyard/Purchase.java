@@ -31,11 +31,12 @@ public class Purchase {
     public Purchase() {
     }
 
-    public Purchase(String date, String credit_card, String cvv, String category) {
+    public Purchase(String date, String credit_card, String cvv, String category, Customer customer) {
         this.date = date;
         this.credit_card = credit_card;
         this.cvv = cvv;
         this.category = category;
+        this.customer = customer;
     }
 
     public Purchase(Integer id, String date, String credit_card, String cvv, String category, Customer customer) {
