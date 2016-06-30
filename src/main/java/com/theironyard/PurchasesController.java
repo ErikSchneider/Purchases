@@ -2,6 +2,10 @@ package com.theironyard;
 
 import org.hibernate.engine.internal.JoinSequence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,16 +58,30 @@ public class PurchasesController {
 
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home(Model model, String category) {
-        Iterable<Purchase> purchase;
+    public String home(Model model, Integer page, String category) {
+        page = (page == null) ? 0 : page;
+
+        PageRequest pr = new PageRequest(page, 10);
+
+        Page<Purchase> purchase;
+
         if (category != null) {
-            purchase = purchases.findByCategory(category);
-            model.addAttribute("purchases", purchase);
+            purchase = purchases.findByCategory(pr, category);
             }
+
         else {
-            purchase = purchases.findAll();
-            model.addAttribute("purchases", purchase);
+            purchase = purchases.findAll(pr);
         }
+
+        model.addAttribute("purchases", purchase);
+        model.addAttribute("category", category);
+
+        model.addAttribute("nextPage", page + 1);
+        model.addAttribute("showNext", purchase.hasNext());
+
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("showPrev", purchase.hasPrevious());
+
         return "home";
     }
 }
